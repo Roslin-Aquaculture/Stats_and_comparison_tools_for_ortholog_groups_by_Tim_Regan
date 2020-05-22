@@ -31,19 +31,13 @@ Set each Class member i.e.
 
 Repeat for each Class. Then add these lists of classes together: 
 "Phylum = Class1+Class2+Classn"
-
 Finally, we need a dictionary telling the script which Class each Species is. 
-
 "SpecClaD = {'Species1':'Class1', 'Species2':'Class1', 'Species3':'Class2', 'Speciesn':'Classn'}"
 
 To get Orthogroups (OGs) associated with a particular Class, run:
-
 $python Get_Class_OGs.py <Results_folder> <Node> <Class>
 
-Where <Results_folder> is the Orthofinder results folder (e.g. Results_May22), 
-
-<Class> is the Class of interest (e.g. Bivalvia)
-
+Where <Results_folder> is the Orthofinder results folder (e.g. Results_May22), <Class> is the Class of interest (e.g. Bivalvia)
 <Node> is the Species_tree_duplications node associated with your Class.
 
 This outputs all of the OGs specific to that class, lost by that class, and OGs with gene duplications retained by >50% of species within that Class.
