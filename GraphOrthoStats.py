@@ -7,6 +7,8 @@
 #e.g. python GraphOrthoStats.py Results_Apr11 "Percentage of genes in species-specific orthogroups"
 #or
 #python GraphOrthoStats.py Results_Apr11 "Percentage of genes in orthogroups"
+#or
+#python GraphOrthoStats.py Results_May01 "Percentage of unassigned genes"
 
 import sys
 import matplotlib
