@@ -1,14 +1,15 @@
 #!/usr/bin/python
-#Name/date: TimRegan/2020.04.14
-#File: GraphOrthoStats.py
-#Purpose: To make graphs of the comparitive statistics between species following Orthofinder analysis.
-#Use in dir above Results folder
-#Usgae: python GraphOrthoStats.py <Results_folder> <Row to graph e.g. % genes assigned>
-#e.g. python GraphOrthoStats.py Results_Apr11 "Percentage of genes in species-specific orthogroups"
-#or
-#python GraphOrthoStats.py Results_Apr11 "Percentage of genes in orthogroups"
-#or
-#python GraphOrthoStats.py Results_May01 "Percentage of unassigned genes"
+# Name/date: TimRegan/2020.04.14
+# File: GraphOrthoStats.py
+# Purpose: To make graphs of the comparitive statistics between species following Orthofinder analysis.
+# Use in dir above Results folder
+# Usgae: python GraphOrthoStats.py <Results_folder> <Row to graph>
+# Where `<Results_folder>` is the Orthofinder results folder (e.g. Results_May22) and 
+# `<Row to graph>` is e.g. "Percentage of genes in species-specific orthogroups" or "Percentage of genes in orthogroups"
+# e.g. 
+# python GraphOrthoStats.py Results_Apr11 "Percentage of genes in species-specific orthogroups"
+# python GraphOrthoStats.py Results_Apr11 "Percentage of genes in orthogroups"
+# python GraphOrthoStats.py Results_May01 "Percentage of unassigned genes"
 
 import sys
 import matplotlib
