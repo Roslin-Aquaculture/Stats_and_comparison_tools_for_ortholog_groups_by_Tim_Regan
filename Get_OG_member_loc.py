@@ -8,7 +8,7 @@
 1. Select OGs and corresponding Gene Tree. 
 2. Retrieve species specific sequences/gene names from selected OGs
 3. Map these genes to the genomes(tblastn)/find chr location from .gff:
-4. Send these to Carolina (along with Chr length for each )
+4. Use these coordinatesalong with Chr length for each species to create CIRCOS plots
 
 Label each seq with Species ID.E.g.: 
 awk '{ gsub(">",">G.species_"); print $0 }' Genus_species.fa > Genus_species_renamed.fa
