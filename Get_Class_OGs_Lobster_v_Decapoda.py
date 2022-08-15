@@ -210,29 +210,3 @@ with open(ClassSpecLossfn,'w') as ClassSpecLossf:
 	for O in ClassSpecLoss:
 		ClassSpecLossf.write("%s\n" % O)
 
-#Do a heatmap of genes/orthogroup for each species from file /Orthogroups/Orthogroups.GeneCount.tsv
-#Use subset of OGs from here.
-#First get subset df. Then for heatmap, should be same as other script. 
-#Don't use corr. Absolute numbers more interesting here.  
-
-#Get average no. of genes/orthogroup for Class
-OGdf = countdf
-OGdf.drop('Total', axis=1, inplace=True)
-OGdf = OGdf[OGdf.index.isin(OGs)]
-#Classes = ['Bivalvia','Caudofoveata','Cephalapoda','Gastropoda','Monoplacophora','Polyplacophora','Scaphopoda','Solenogastres']
-Classes = ['Fly', 'Water_flea', 'Amphipod', 'Lobster', 'Shrimp', 'Crab', 'Crayfish']
-palette = sns.color_palette()
-lut = dict(zip(map(str, Classes), palette))
-# Convert the palette to vectors that will be drawn on the side of the matrix
-# Mathes each class used to a colour. 
-Spec_Classes = (OGdf.columns.to_series()).map(SpeClaD)
-#Gets the index of the df (species names) and maps them to corresponding taxa Class
-col_colors = Spec_Classes.map(lut)
-
-ClusterGrid = sns.clustermap(OGdf, col_colors=col_colors)
-#This creates the clustermap based on correlation
-plt.setp(ClusterGrid.ax_heatmap.yaxis.get_majorticklabels(), rotation=0)
-#This makes the y-axis titles horizontal
-fig = plt.gcf()
-filename = OGsDir+'/'+TaxClass+"_GeneDup_OGs_Heatmap.png"
-fig.savefig(filename, dpi=300)
