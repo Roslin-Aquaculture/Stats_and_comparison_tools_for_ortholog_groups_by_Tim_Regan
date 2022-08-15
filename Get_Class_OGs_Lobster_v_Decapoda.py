@@ -216,7 +216,7 @@ with open(ClassSpecLossfn,'w') as ClassSpecLossf:
 #Don't use corr. Absolute numbers more interesting here.  
 
 #Get average no. of genes/orthogroup for Class
-OGdf = pd.read_csv(OG_count, sep="\t", index_col="Orthogroup")
+OGdf = countdf
 OGdf.drop('Total', axis=1, inplace=True)
 OGdf = OGdf[OGdf.index.isin(OGs)]
 #Classes = ['Bivalvia','Caudofoveata','Cephalapoda','Gastropoda','Monoplacophora','Polyplacophora','Scaphopoda','Solenogastres']
