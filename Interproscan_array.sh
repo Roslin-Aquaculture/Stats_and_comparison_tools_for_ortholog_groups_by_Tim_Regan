@@ -12,6 +12,12 @@
 . /etc/profile.d/modules.sh
 module load roslin/interproscan/5.33-72.0 
 
+# Combine all sequences into one file:
+# $ cat *.fa > All_proteins.fa
+# Used this one liner to split fasta sequence of all proteins into multiple smaller fasta of 400 sequences each:
+# $ awk 'BEGIN {n_seq=0;} /^>/ {if(n_seq%400==0){file=sprintf("myseq%d.fa",n_seq);} print >> file; n_seq++; next;} { print >> file; }' < All_proteins.fa
+# Transfer these smaller files into /exports/eddie/scratch/tregan/IPR_data and count number of files (e.g. here there are 34 files). 
+
 cd /exports/eddie/scratch/tregan/IPR_data
 
 F=`sed -n ${SGE_TASK_ID}p < /exports/eddie/scratch/tregan/IPR_data/IPR_List.txt`
