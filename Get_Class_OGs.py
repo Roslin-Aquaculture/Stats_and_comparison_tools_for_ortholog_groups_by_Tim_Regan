@@ -1,16 +1,16 @@
 #!/usr/bin/python
-#Name/date: TimRegan/2022.08.11
-#File: Get_Class_OGs_Lobster_v_Decapoda.py
-#Purpose: To ID and extract the names of orthogroups which have gene duplications retained in at least 50% of Class analysed. 
-#Edit "Support threshold" for Duplications if 0.5 not desired.
-#Also outputs Class specific OGs, OGs whcih are in every species apart form this Class.
-#Also gives a heatmap of no. of genes in OGs with Duplications supported in the Class selected for all species 
-#Usgae: python Get_Class_OGs_Lobster_v_Decapoda.py <Results_folder> <Node> <Class>
-#e.g. 
-#python Get_Class_OGs_Lobster_v_Decapoda.py Results_RAXML-NG_Tree_1 N8 Lobster
-#python Get_Class_OGs_Decapoda_v_all.py Results_RAXML-NG_Tree_1 N3 Decapoda
-#python Get_Class_OGs.py Results_May16 N7 Bivalvia
-#python Get_Class_OGs.py Results_May16 N8 Gastropoda
+# Name/date: TimRegan/2022.08.11
+# File: Get_Class_OGs.py
+# Purpose: To ID and extract the names of orthogroups which have gene duplications retained in at least 50% of Class analysed. 
+# Edit "Support threshold" for Duplications if 0.5 not desired.
+# Also outputs Class specific OGs, OGs whcih are in every species apart form this Class.
+# Make sure to navigate to Orthofinder folder containing results folders.
+# Usgae: python Get_Class_OGs_Lobster_v_Decapoda.py <Results_folder> <Node> <Class>
+# e.g. 
+# python Get_Class_OGs.py Results_RAXML-NG_Tree_1 N8 Lobster
+# python Get_Class_OGs.py Results_RAXML-NG_Tree_1 N3 Decapoda
+# python Get_Class_OGs.py Results_May16 N7 Bivalvia
+# python Get_Class_OGs.py Results_May16 N8 Gastropoda
 
 from __future__ import division
 import matplotlib
@@ -27,7 +27,7 @@ import os
 from shutil import copyfile
 #for copying .fasta files of Orthogroup sequences
 
-#Dictionary to rename species names from file names
+# Dictionary to rename species names from file names, if necessary
 File_species = { "D_mela_protein" :"Drosophila_melanogaster", \
 "D_magn_protein" : "Daphnia_magna", \
 "H_azte_protein" : "Hyalella_azteca", \
@@ -36,7 +36,7 @@ File_species = { "D_mela_protein" :"Drosophila_melanogaster", \
 "P_trit_protein" : "Portunus_trituberculatus", \
 "P_clar_protein" : "Procambarus_clarkii", "C_dest_protein" : "Cherax_destructor"}
 
-#Taxa groups
+# Taxa groups - state which species are in which taxonomic class following examples included here:
 Fly = ["Drosophila_melanogaster"]
 Water_flea = ["Daphnia_magna"]
 Amphipod = ["Hyalella_azteca"]
@@ -45,6 +45,7 @@ Shrimp = ["Penaeus_vannamei", "Penaeus_chinensis", "Penaeus_japonicus", "Penaeus
 Crab = ["Portunus_trituberculatus"]
 Crayfish = ["Procambarus_clarkii", "Cherax_destructor"]
 
+# Create a dictionary using information provided in taxa groups following this example:
 SpeClaD = { "Drosophila_melanogaster" : "Fly", \
 "Daphnia_magna" : "Water_flea", \
 "Hyalella_azteca" : "Amphipod", \
@@ -53,26 +54,25 @@ SpeClaD = { "Drosophila_melanogaster" : "Fly", \
 "Portunus_trituberculatus" : "Crab", \
 "Procambarus_clarkii" : "Crayfish", "Cherax_destructor" : "Crayfish"}
 
+# SpeClaD = {'Acanthochitona_crinita': 'Polyplacophora', 'Achatina_fulica': 'Gastropoda', 'Aplysia_californica': 'Gastropoda', 'Bathymodiolus_platifrons': 'Bivalvia', 'Biomphalaria_glabrata': 'Gastropoda', 'Crassostrea_gigas': 'Bivalvia', 'Crassostrea_virginica': 'Bivalvia', 'Cristaria_plicata': 'Bivalvia', 'Elysia_chlorotica': 'Gastropoda', 'Gadila_tolmiei': 'Scaphopoda', 'Gymnomenia_pellucida': 'Solenogastres', 'Laevipilina_hyalina': 'Monoplacophora', 'Laternula_elliptica': 'Bivalvia', 'Lottia_gigantea': 'Gastropoda', 'Lymnaea_stagnalis': 'Gastropoda', 'Mizuhopecten_yessoensis': 'Bivalvia', 'Modiolus_philippinarum': 'Bivalvia', 'Mya_arenaria': 'Bivalvia', 'Mya_truncata': 'Bivalvia', 'Mytilus_edulis': 'Bivalvia', 'Mytilus_galloprovincialis': 'Bivalvia', 'Octopoteuthis_deletron': 'Cephalapoda', 'Octopus_bimaculoides': 'Cephalapoda', 'Octopus_sinensis': 'Cephalapoda', 'Octopus_vulgaris': 'Cephalapoda', 'Pecten_maximus': 'Bivalvia', 'Pinctada_fucata': 'Bivalvia', 'Pomacea_canaliculata': 'Gastropoda', 'Scutopus_ventrolineatus': 'Caudofoveata', 'Vampyroteuthis_infernalis': 'Cephalapoda', 'Wirenia_argentea': 'Solenogastres'}
+
+# State collective groups of taxa for analysing following the examples included here:
 Decapoda = Lobster+Shrimp+Crab+Crayfish
 All_taxa = Decapoda+Fly+Water_flea+Amphipod
 
 #Mollusca = Caudofoveata+Bivalvia+Cephalopoda+Gastropoda+Monoplacophora+Polyplacophora+Scaphopoda+Solenogastres
 #Classes = ['Bivalvia','Caudofoveata','Cephalapoda','Gastropoda','Monoplacophora','Polyplacophora','Scaphopoda','Solenogastres']
 
-#Dictionary with each species and corresponding Class. 
-#SpeClaD = {'Acanthochitona_crinita': 'Polyplacophora', 'Achatina_fulica': 'Gastropoda', 'Aplysia_californica': 'Gastropoda', 'Bathymodiolus_platifrons': 'Bivalvia', 'Biomphalaria_glabrata': 'Gastropoda', 'Crassostrea_gigas': 'Bivalvia', 'Crassostrea_virginica': 'Bivalvia', 'Cristaria_plicata': 'Bivalvia', 'Elysia_chlorotica': 'Gastropoda', 'Gadila_tolmiei': 'Scaphopoda', 'Gymnomenia_pellucida': 'Solenogastres', 'Laevipilina_hyalina': 'Monoplacophora', 'Laternula_elliptica': 'Bivalvia', 'Lottia_gigantea': 'Gastropoda', 'Lymnaea_stagnalis': 'Gastropoda', 'Mizuhopecten_yessoensis': 'Bivalvia', 'Modiolus_philippinarum': 'Bivalvia', 'Mya_arenaria': 'Bivalvia', 'Mya_truncata': 'Bivalvia', 'Mytilus_edulis': 'Bivalvia', 'Mytilus_galloprovincialis': 'Bivalvia', 'Octopoteuthis_deletron': 'Cephalapoda', 'Octopus_bimaculoides': 'Cephalapoda', 'Octopus_sinensis': 'Cephalapoda', 'Octopus_vulgaris': 'Cephalapoda', 'Pecten_maximus': 'Bivalvia', 'Pinctada_fucata': 'Bivalvia', 'Pomacea_canaliculata': 'Gastropoda', 'Scutopus_ventrolineatus': 'Caudofoveata', 'Vampyroteuthis_infernalis': 'Cephalapoda', 'Wirenia_argentea': 'Solenogastres'}
-
 node = str(sys.argv[2])
-#This is the  root node from the species tree. 
+# This is the  root node from the species tree. 
 Support_threshold = 0.5
 
 TaxClass = str(sys.argv[3])
 TaxList = eval(TaxClass)
-#NonClass = [s for s in Decapoda if s not in TaxList]
-#For Decapod branch vs. other decapods 
-
+# NonClass = [s for s in Decapoda if s not in TaxList]
+# For Decapod branch vs. other decapods i.e. conparing one tree branch to its surrounding branches without necessarily including all members
 NonClass = [s for s in All_taxa if s not in TaxList]
-#For any taxa group listed above versus everything else
+# For any taxa group listed above versus everything else included in tree
 
 dups = str(sys.argv[1])+'/Gene_Duplication_Events/Duplications.tsv'
 #The Duplications.tsv file
