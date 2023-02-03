@@ -32,26 +32,26 @@ Run OrthoFinder according to tutorial and requirements.
 **Note:** *MSA is more appropriate to run, but may take much longer. If you have many assemblies (e.g. >8) Running other tree alignmers such as RAXML or IQTREE may be more appropriate for species tree, but not required for gene trees and will take an impossible length of time for most studies. Suggest generating species tree seperately if required.* 
 
 # Analysing OrthoFinder output
-To get an initial look at what the results look like, see: [GraphOrthoStats.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/GraphOrthoStats.py)
+To get an initial visualisation at what the overall results look like, use: [GraphOrthoStats.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/GraphOrthoStats.py)
 
-# Class specific Orthogroups (OGs)
+# Taxa specific Orthogroups (OGs)
 In this case, we wished to compare orthogroups/gene families across taxa e.g. Bivalvia vs. Mollusca or Ostrea edulis vs Bivalvia or Lobsters vs Decapoda. 
 
-See: [Get_Class_OGs.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Get_Class_OGs_Lobster_v_Decapoda.py) \
+See: [Get_Taxa_OGs.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Get_Class_OGs_Lobster_v_Decapoda.py) \
 Following instructions in script notes very carefully. 
 Need to give some information to first Python file e.g. species within class group etc. 
 
-To get Orthogroups (OGs) associated with a particular Class, run: \
-`$python Get_Class_OGs.py <Results_folder> <Node> <Class>`
+To get Orthogroups (OGs) associated with a particular taxa group, run: \
+`$python Get_Taxa_OGs.py <Results_folder> <Node> <Taxa>`
 
 Where `<Results_folder>` is the Orthofinder results folder 
 (e.g. Results_May22), \
-`<Class>` is the Class of interest (e.g. Bivalvia) \
-and `<Node>` is the Species_tree_duplications node associated with your Class.
+`<Taxa>` is the Taxa group of interest (e.g. Bivalvia) \
+and `<Node>` is the Species_tree_duplications node associated with your taxa.
 
-This outputs all of the OGs specific to that class, lost by that class, and OGs with gene duplications retained by >50% (default, can chnage under "support" value in script, anywhere from 0.0 - 1.0) of species within that Class.
+This outputs all of the OGs specific to that taxa, lost by that taxa group, and OGs with gene duplications retained by >50% (default, can chnage under "support" value in script, anywhere from 0.0 - 1.0) of species within that Taxa.
 
-From the OGs with duplication events, it produces a table with OGs ranked in order of how many Class members have the duplication (Support), and the avg. Fold-Change of genes within the OG compared to other Classes in addition to a Mann-Whitney U test to provide a p value for OGs significantly expanded in your taxa of interest vs other taxa included in the comparison e.g. labster vs. other Decapods or Bivalves vs. other Molluscs. 
+From the OGs with duplication events, it produces a table with OGs ranked in order of how many taxa group members have the duplication (Support), and the avg. Fold-Change of genes within the OG compared to other taxa in addition to a Mann-Whitney U test to provide a p value for OGs significantly expanded in your taxa of interest vs other taxa included in the comparison e.g. labster vs. other Decapods or Bivalves vs. other Molluscs. 
 
 # Kinfin analyses 
 KinFin is a toolkit for the local implementation of automated analyses of clustered proteins through custom taxon grouping:
