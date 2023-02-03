@@ -49,6 +49,9 @@ plt.tight_layout()
 fig = plt.gcf()
 fig.savefig('cdhit_seqs.per.clstr.strip.png', dpi=300)
 
+#The above code creates a strip plot. See code below for other viz options e.g. violin plots, boxplots etc. 
+#Uncomment code accordingly. 
+
 #plt.ylim(0, 6)
 #This sets y axis limits to allow easier viz.
 #fig1a = plt.gcf()
