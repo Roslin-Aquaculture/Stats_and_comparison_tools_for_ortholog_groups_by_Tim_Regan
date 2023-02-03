@@ -90,23 +90,3 @@ To obtain Chromosomal location of genes of interest for Synteny mapping, see: [G
 *Requires the dictionary of unique identifiers used previously for each species header (see above). 
 It outputs two results files for each species of interest: the gene names and their sequences specific to each species.
 The list of gene names can then be run against a .gff annotaion file to give the chromosome, gene start, gene end and gene name. See notes at end of script. 
-
-# Making a Network Graph of OG genes **(use with caution!)**
-The genes trees provided by OrthoFinder are very useful for identifying Orthologs vs. Paralogs etc.
-However, these can become confusing to the point of being unreadable when multiple species and genes are present. \
-To view the OG using a Network Graph, see: [OGfa2graph.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/OGfa2graph.py)
-**Caution** This can be very useful as a visualisation tool, but care should be taken when drawing conclusions from such graphs. E.g. these have not been corrected for using the species tree etc. but when annotated according to Taxa group can offer a useful comparison of taxa diversity within an orthogroup. 
-
-Runs a BLAST all v. all on each of the OG sequences and creates a pairwise.txt file of their relationships. \
-Requires taxonomic species/grouping dictionary from before for colouring. \
-Also requires a dictionary stating the unique header identifiers from each species assembly
-i.e. \
-Headers = {'ID1':'Species1', 'IDn':'Speciesn'} \
-e.g. Headers = {'Cgiga':'Crassostrea_gigas', 'Hgamm':'Homarus_gammarus'} etc. 
-
-Also requires Blast to be callable from the home directory. Make sure the module is loaded, or else edit the script. 
-
-Options for stringency of comparisons are available. 
-This way, we can delve into when gene duplications occurred (phyogenetic relationships), which are Species/Class specific.
-Colour coding the graph by species/class makes this much more comprehensible and the graph can be filtered according to similarity.nearest neighbour etc.
-
