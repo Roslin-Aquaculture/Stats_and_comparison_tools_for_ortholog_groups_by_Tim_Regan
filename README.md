@@ -32,14 +32,14 @@ Run OrthoFinder according to tutorial and requirements.
 **Note:** *MSA is more appropriate to run, but may take much longer. If you have many assemblies (e.g. >8) Running other tree alignmers such as RAXML or IQTREE may be more appropriate for species tree, but not required for gene trees and will take an impossible length of time for most studies. Suggest generating species tree seperately if required.* 
 
 # Analysing OrthoFinder output
-To get an initial visualisation at what the overall results look like, use: [GraphOrthoStats.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/GraphOrthoStats.py)
+To get an initial visualisation at what the overall results look like, use: [GraphOrthoStats.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/GraphOrthoStats.py)
 
 # Taxa specific Orthogroups (OGs)
 In this case, we wished to compare orthogroups/gene families across taxa e.g. Bivalvia vs. Mollusca or Ostrea edulis vs Bivalvia or Lobsters vs Decapoda. 
 
-See: [Get_Taxa_OGs.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Get_Class_OGs_Lobster_v_Decapoda.py) \
+See: [Get_Taxa_OGs.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Get_Taxa_OGs.py) \
 Following instructions in script notes very carefully. 
-Need to give some information to first Python file e.g. species within class group etc. 
+Need to give some information to first Python file e.g. species within taxa group etc. 
 
 To get Orthogroups (OGs) associated with a particular taxa group, run: \
 `$python Get_Taxa_OGs.py <Results_folder> <Node> <Taxa>`
@@ -48,6 +48,8 @@ Where `<Results_folder>` is the Orthofinder results folder
 (e.g. Results_May22), \
 `<Taxa>` is the Taxa group of interest (e.g. Bivalvia) \
 and `<Node>` is the Species_tree_duplications node associated with your taxa.
+
+**NOTE:** Make sure to define your specific taxa groupings with lists of individual taxa/species peptide sequences with in-line editing of the script *(see line 8 of script)*.  
 
 This outputs all of the OGs specific to that taxa, lost by that taxa group, and OGs with gene duplications retained by >50% (default, can chnage under "support" value in script, anywhere from 0.0 - 1.0) of species within that Taxa.
 
@@ -60,7 +62,7 @@ it takes a protein clustering output by tools such as OrthoFinder or OrthoMCL, a
 
 Please see https://kinfin.readme.io/docs for more information. 
 
-Note: takes in interproscan annotation file: \
+**Note:** takes in interproscan annotation file: \
  `iprs2table.py -i Clustered_proteins_IPR.tsv --domain_sources GO,Pfam`
 
  An example of code to run Kinfin (requires manually created config file, see: https://kinfin.readme.io/docs/starting-from-a-clustering-files) \
@@ -77,13 +79,13 @@ Note: takes in interproscan annotation file: \
 
 # Searching for proteins of interest
 We might be looking for which orthgroups certain proteins have fallen into (or which other proteins they are in an orthogroup with). e.g. TLR proteins, IFN genes etc. \
-See [Find_containing.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/Find_containing.py) \
+See [Find_containing.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Find_containing.py) \
 Requires a directory of .fa files to search for protein description.
 
 # Making a Network Graph of OG genes
 The genes trees provided by OrthoFinder are very useful for identifying Orthologs vs. Paralogs etc.
 However, these can become confusing to the point of being unreadable when multiple species and genes are present. \
-To view the OG using a Network Graph, see: [OGfa2graph.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/OGfa2graph.py)
+To view the OG using a Network Graph, see: [OGfa2graph.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/OGfa2graph.py)
 
 Runs a BLAST all v. all on each of the OG sequences and creates a pairwise.txt file of their relationships. \
 Requires taxonomic species/grouping dictionary from before for colouring. \
@@ -101,7 +103,7 @@ Colour coding the graph by species/class makes this much more comprehensible and
 # Synteny mapping of selected OG genes
 Synteny mapping can be performed to compare Orthogroups between species. 
 Best done using species which have good genome assemblies ideally at a chromosomal level. 
-To obtain Chromosomal location of genes of interest for Synteny mapping, see: [Get_OG_member_loc.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/Get_OG_member_loc.py)
+To obtain Chromosomal location of genes of interest for Synteny mapping, see: [Get_OG_member_loc.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Get_OG_member_loc.py)
 
 Requires the dictionary of unique identifiers used previously for each species header (see above). 
 It outputs two results files for each species of interest: the gene names and their sequences specific to each species.
