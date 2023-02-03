@@ -5,6 +5,7 @@
 # Edit "Support threshold" for Duplications if 0.5 not desired.
 # Also outputs taxa specific OGs, OGs whcih are in every species apart form this Taxa.
 # Make sure to navigate to Orthofinder folder containing results folders.
+# IMPORTANT: Edit as appropriate for your analyses and taxa on lines: 32, 41, 50, 61, 62, 69, 
 # Usgae: python Get_Taxa_OGs_Lobster_v_Decapoda.py <Results_folder> <Node> <Taxa>
 # e.g. 
 # python Get_Taxa_OGs.py Results_RAXML-NG_Tree_1 N8 Lobster
