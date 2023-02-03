@@ -11,7 +11,7 @@
 # Initialise the environment modules
 . /etc/profile.d/modules.sh
 
-#NB: Ensure paths are stated in teh config.ini file within BUSCO, ensure datasets are downloaded e.g. Mollusca/Metazoa etc.
+#NB: Ensure paths are stated in the config.ini file within BUSCO, ensure datasets are downloaded e.g. Mollusca/Metazoa etc.
 #Set paths in config.ini:
 #[augustus]
 # path to augustus
