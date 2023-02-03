@@ -1,16 +1,16 @@
-# Orthofinder_Pipeline
-Orthogroup and gene group diversification/selection analysis between groups of species (e.g. Bivalves vs. other Molluscs or Ostrea edulis vs. other Bivalves). 
+#Stats and comparison tools for ortholog groups
+Analysis of diversity across orthologous gene groups (orthogroups) between defined taxa (e.g. Bivalves vs. other Molluscs or Ostrea edulis vs. other Bivalves). 
 To run this analysis, we first take a directory of peptide sequences.
 
 # Preparing Peptide sequences
-See: [Preparing_peptides.sh](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/Preparing_peptides.sh) \
+See: [Preparing_peptides.sh](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Preparing_peptides.sh) \
 Peptides are filtered for the longest isoform using [AGAT, available on Github](https://github.com/NBISweden/AGAT/blob/master/bin/agat_sp_keep_longest_isoform.pl).
 Name files in the format "Genus_species.fa" (OrthoFinder uses filename without the extension as species name). \
-Also rename fasta headers to include genus and species information - avoids duplicate sequence name errors:\
-`$awk '{ gsub(">",">G.species_"); print $0 }' Genus_species.fa > Genus_species_renamed.fa`
+Also rename fasta headers to include genus and species information - this avoids duplicate sequence name errors and allows easier species ID when examining genes later:\
+`$awk '{ gsub(">",">G.species_"); print $0 }' Protein_sequences.fa > Genus_species.fa`
 
-CD-Hit is then run to examine clusters of sequences (may also use this to filter for longest cluster sequence if using AGAT is not possible).\
-See: [cdhit_cluster_analysis.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/cdhit_cluster_analysis.py) \
+CD-Hit is then used to examine clusters of sequences (may also use this to filter for longest cluster sequence if using AGAT is not possible).\
+See: [cdhit_cluster_analysis.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/cdhit_cluster_analysis.py) \
 These results can be plotted using [cdhit_cluster_plot.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/cdhit_cluster_plot.py)
 
 BUSCO may also be run to assess completeness of assemblies. 
@@ -18,7 +18,7 @@ BUSCO may also be run to assess completeness of assemblies.
 # Annotation of peptide assemblies
 Use interproscan to annotate all peptides used. 
 A useful approach is to first concatenate all (filtered, header renamed) peptide sequences together, then split this file into many smaller files and run individually on Interproscan before finally combining the resulting output.\
-See [Interproscan_array.sh](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/Interproscan_array.sh)\
+See [Interproscan_array.sh](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Interproscan_array.sh)\
 Combine results into one file e.g. \
 `cat *.tsv > All_proteins.tsv` \
 This will be used later in Kinfin analysis
@@ -36,7 +36,7 @@ To get an initial look at what the results look like, see: [GraphOrthoStats.py](
 # Class specific Orthogroups (OGs)
 In this case, we wished to compare orthogroups/gene families across taxa e.g. Bivalvia vs. Mollusca or Ostrea edulis vs Bivalvia or Lobsters vs Decapoda. 
 
-See: [Get_Class_OGs.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/Get_Class_OGs_Lobster_v_Decapoda.py) \
+See: [Get_Class_OGs.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Get_Class_OGs_Lobster_v_Decapoda.py) \
 Following instructions in script notes very carefully. 
 Need to give some information to first Python file e.g. species within class group etc. 
 
