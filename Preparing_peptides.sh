@@ -3,18 +3,18 @@
 #2022.04.01
 #Preparing_peptides.sh
 #Clusters peptide sequences for each species and retains the longest member of each cluster as a proxy for longest isoform of each gene. 
-
 #Prior to running this, first ensured headers all contained first letter of genus and first 4 letters of species, e.g.
 #$ awk '{ gsub(">",">Medul_"); print $0 }' Mytilus_edulis.fa  > Mytilus_edulis_.fa
 #Repeat for each species
+#Also edit paths to fodlers in lines 16, 
 
-#load required modules
-module load igmm/apps/cdhit/4.6.8
+#load cdhit to the executable
+#If using University of Edinburgh computing cluster, run the following
+# module load igmm/apps/cdhit/4.6.8
 
 #go to peps directory
-cd /exports/eddie/scratch/tregan/Mytilus
+cd /my/peptide/directory
 mkdir cd-hit
-
 
 # run cd-hit on each peptome
 for peps in *.fa; do  cd-hit -i $peps -o ../"$peps" -T 4; done
