@@ -5,8 +5,10 @@
 """
 Takes an Orthogroup.fasta file and runs Blastp all versus all to generate a pairwise .txt file.
 This can be used to generate a graph using Graphia. Nodes are also annotated according to species and class. 
+NOTE: ensure Headers dictionary (line 21) is updated to reflect species name with corresponding fasta headers used in each peptide assembly
 Requires Blastp module to be loaded, and the ability to create a megablastDB
-e.g. module load igmm/apps/blast/2.2.26
+e.g. if using University of Edinburgh EDDIE cluster, use:
+module load igmm/apps/blast/2.2.26
 """
 import os, glob, commands
 import string
