@@ -6,7 +6,7 @@
 # Usgae: python GraphOrthoStats.py <Results_folder> <Row to graph>
 # Where `<Results_folder>` is the Orthofinder results folder (e.g. Results_May22) and 
 # `<Row to graph>` is e.g. "Percentage of genes in species-specific orthogroups" or "Percentage of genes in orthogroups"
-# e.g. 
+# e.g.
 # python GraphOrthoStats.py Results_Apr11 "Percentage of genes in species-specific orthogroups"
 # python GraphOrthoStats.py Results_Apr11 "Percentage of genes in orthogroups"
 # python GraphOrthoStats.py Results_May01 "Percentage of unassigned genes"
