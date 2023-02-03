@@ -1,4 +1,4 @@
-# Stats and comparison tools for ortholog groups
+# Stats and comparison tools for ortholog groups !!!!!
 Analysis of diversity across orthologous gene groups (orthogroups) between defined taxa (e.g. Bivalves vs. other Molluscs or Ostrea edulis vs. other Bivalves). 
 To run this analysis, we first take a directory of peptide sequences.
 
