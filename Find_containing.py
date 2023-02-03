@@ -3,7 +3,7 @@
 #File: Find_containing.py
 #Version: 1
 #Purpose: Finds files matching a given string, or list of strings.
-#Usgae: python Find_containing.py <Directory of .fa files string> <file with gene names>
+#Usgae: python Find_containing.py <Directory of .fa files string> <file with gene names> 
 
 """e.g. C.gigas IAP family genes (grep IAP Crassostrea_gigas.fa > C.gigas_IAPs.txt) (ALSO BCL2)
 48 IAPs annotated from the genome of Crassostrea,5 and further supported by the 61 found in Pinctada in this study. The S. glomerata genome encodes 80 IAP
