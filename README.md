@@ -2,6 +2,18 @@
 Analysis of diversity across orthologous gene groups (orthogroups) between defined taxa (e.g. Bivalves vs. other Molluscs or Ostrea edulis vs. other Bivalves). 
 To run this analysis, we first take a directory of peptide sequences.
 
+Table of Contents
+=================
+* [Preparing Peptide sequences](#preparing-peptide-sequences)
+* [Annotation of peptide assemblies](#annotation-of-peptide-assemblies)
+* [Orthofinder analyses](#orthofinder-analyses)
+* [Analysing OrthoFinder output](#analysing-orthofinder-output)
+* [Taxa specific Orthogroups (OGs)](#taxa-specific-orthogroups-ogs)
+* [Kinfin analyses](#kinfin-analyses)
+* [Searching for proteins of interest](#searching-for-proteins-of-interest)
+* [Synteny mapping of selected OG genes](#synteny-mapping-of-selected-og-genes)
+
+
 # Preparing Peptide sequences
 See: [Preparing_peptides.sh](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Preparing_peptides.sh) \
 Peptides are filtered for the longest isoform using [AGAT, available on Github](https://github.com/NBISweden/AGAT/blob/master/bin/agat_sp_keep_longest_isoform.pl).
