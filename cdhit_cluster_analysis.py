@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #Name/date: TimRegan/2020.04.07
-#File: cdhit_cluster_analysis.py
+#File: cdhit_cluster_analysis.py 
 #Purpose: To output the number of clusters, and sequences per cluster for a .cdhit.clstr cd-hit output file
 #Usgae:	python cdhit_cluster_analysis.py <file>
 #Or:	for f in *.cdhit.clstr ; do python cdhit_cluster_analysis.py $f ; done
