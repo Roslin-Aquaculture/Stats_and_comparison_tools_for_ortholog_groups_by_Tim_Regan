@@ -1,4 +1,4 @@
-#Stats and comparison tools for ortholog groups
+# Stats and comparison tools for ortholog groups
 Analysis of diversity across orthologous gene groups (orthogroups) between defined taxa (e.g. Bivalves vs. other Molluscs or Ostrea edulis vs. other Bivalves). 
 To run this analysis, we first take a directory of peptide sequences.
 
@@ -9,16 +9,17 @@ Name files in the format "Genus_species.fa" (OrthoFinder uses filename without t
 Also rename fasta headers to include genus and species information - this avoids duplicate sequence name errors and allows easier species ID when examining genes later:\
 `$awk '{ gsub(">",">G.species_"); print $0 }' Protein_sequences.fa > Genus_species.fa`
 
-CD-Hit is then used to examine clusters of sequences (may also use this to filter for longest cluster sequence if using AGAT is not possible).\
+CD-Hit is then used to examine clusters of sequences (may also use this to filter for longest cluster sequence if using AGAT (agat_sp_keep_longest_isoform.pl) from the previous step is not possible).\
 See: [cdhit_cluster_analysis.py](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/cdhit_cluster_analysis.py) \
-These results can be plotted using [cdhit_cluster_plot.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/cdhit_cluster_plot.py)
+These results can be visualised using [cdhit_cluster_plot.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/cdhit_cluster_plot.py)
 
-BUSCO may also be run to assess completeness of assemblies. 
+BUSCO can also be used to assess and report completeness of assemblies. These are useful metrics when further analysing your orthogroup results e.g. prior knowledge of a large proportion of dulpicatied genes from BUSCO may explain a lot of supposed duplication events in ortholog analyses. 
 
 # Annotation of peptide assemblies
 Use interproscan to annotate all peptides used. 
-A useful approach is to first concatenate all (filtered, header renamed) peptide sequences together, then split this file into many smaller files and run individually on Interproscan before finally combining the resulting output.\
-See [Interproscan_array.sh](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Interproscan_array.sh)\
+A useful approach is to first concatenate all peptide sequences together, then split this file into many smaller files and run individually on Interproscan before finally combining the resulting output.\
+**NOTE:** *Make sure that you are using the filtered and renamed peptide filesto avoid naming mismatch during later analysis* \
+If you are working on teh University of Edinburgh computing cluster: See [Interproscan_array.sh](https://github.com/Roslin-Aquaculture/Stats-and-comparison-tools-for-ortholog-groups-by-Tim-Regan/blob/master/Interproscan_array.sh)\
 Combine results into one file e.g. \
 `cat *.tsv > All_proteins.tsv` \
 This will be used later in Kinfin analysis
@@ -28,7 +29,7 @@ See these tutorials for using OrthoFinder: https://davidemms.github.io/menu/tuto
 
 Run OrthoFinder according to tutorial and requirements. 
 
-Note: MSA is more appropriate to run, but may take longer. Running other tree alignmers such as RAXML or IQTREE may be more appropriate for species tree, but not required for gene trees and will take an impossible length of time for most studies. Suggest generating species tree seperately if required. 
+**Note:** *MSA is more appropriate to run, but may take much longer. If you have many assemblies (e.g. >8) Running other tree alignmers such as RAXML or IQTREE may be more appropriate for species tree, but not required for gene trees and will take an impossible length of time for most studies. Suggest generating species tree seperately if required.* 
 
 # Analysing OrthoFinder output
 To get an initial look at what the results look like, see: [GraphOrthoStats.py](https://github.com/Roslin-Aquaculture/Orthofinder_Bivalvia/blob/master/GraphOrthoStats.py)
