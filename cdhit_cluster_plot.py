@@ -12,7 +12,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-cdhitfs = raw_input("Enter your directory containing seqs/cluster: ")
+cdhitfs = input("Enter your directory containing seqs/cluster: ")
 path = r''+cdhitfs # use your path
 all_files = glob.glob(path + "/*.csv")
 
